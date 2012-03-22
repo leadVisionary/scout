@@ -1,0 +1,2 @@
+class FormattingStrategy
+  format: (data) ->

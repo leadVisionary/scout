@@ -1,0 +1,2 @@
+class RetrievalTechnique
+  retrieve: (location) ->

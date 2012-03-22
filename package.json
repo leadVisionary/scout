@@ -1,0 +1,20 @@
+{
+     "name":"scout",
+        "description":"prototype of the Scout archetype for the rzr-js framework",
+           "version":"0.0.1",
+              "homepage":"http://github.com/wearefractal/scout",
+                 "repository":"git://github.com/wearefractal/scout.git",
+                    "author":"Fractal <contact@wearefractal.com> (http://wearefractal.com/)",
+                       "main":"./scout.js",
+
+                          "dependencies":{
+                                  "coffee-script":"*",
+                                             },
+                             "devDependencies":{
+                                     "node-log":"*",
+                                           "should":"*"
+                                                },
+                                "engines":{
+                                        "node":">= 0.6.0"
+                                             }
+}

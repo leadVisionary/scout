@@ -1,2 +1,4 @@
 class FormattingStrategy
-  format: (data) ->
+  applyFormat: (data) ->
+
+module.exports = FormattingStrategy

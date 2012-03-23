@@ -1,2 +1,6 @@
+FormattingStrategy = require './FormattingStrategy.coffee'
+
 class NoTransformation extends FormattingStrategy
-  format: (data) ->
+  applyFormat: (data) -> data
+
+module.exports = NoTransformation

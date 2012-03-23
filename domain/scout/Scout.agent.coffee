@@ -11,3 +11,5 @@ class Scout
   setStrategy: (strategy) -> @strategy = strategy
   setFormatter: (formatter) -> @formatter = formatter
   setTechnique: (technique) -> @retrievalTechnique = technique
+
+module.exports = Scout

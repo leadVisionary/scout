@@ -1,10 +1,11 @@
-require 'should'
 NoTransformation = require '../NoTransformation.coffee'
+require 'should'
 
-describe "NoTranformation", ()->
-  describe "#transform", ()->
-    it "should not transform its input", (done)->
-      data = [8, 6, 7, 5. 3. 0. 9]
-      tranformedData = NoTranformation.apply data
+transformer = new NoTransformation()
+
+describe 'NoTranformation', ->
+  describe '#transform', ->
+    it 'should not transform its input', ->
+      data = [1, 2, 3]
+      transformedData = transformer.applyFormat(data)
       transformedData.should.equal data
-      done()

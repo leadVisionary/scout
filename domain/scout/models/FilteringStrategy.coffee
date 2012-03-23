@@ -1,2 +1,0 @@
-class FilteringStrategy
-  apply: (data) ->

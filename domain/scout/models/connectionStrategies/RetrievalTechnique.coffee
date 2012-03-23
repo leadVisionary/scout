@@ -1,4 +1,4 @@
 class RetrievalTechnique
-  retrieve: (location) ->
+  retrieve: (location, callback) ->
 
 module.exports = RetrievalTechnique

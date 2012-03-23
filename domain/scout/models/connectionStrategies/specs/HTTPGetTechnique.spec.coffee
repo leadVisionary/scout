@@ -10,6 +10,9 @@ before ->
     if pathname == "/valid"
       response.writeHead 200, "Content-Type": "text/plain"
       response.write "page was found"
+    else if pathname == "/error310"
+      response.writeHead 310, "Content-Type": "text/plain"
+      response.write "this is an error"
     else
       response.writeHead 404, "Content-Type": "text/plain"
       response.write "page not found"
@@ -19,11 +22,13 @@ before ->
 describe 'HTTPGetTechnique', ->
   describe '#get',  ->
     it 'should get the contents of an http location', ->
-      data = httpGetter.retrieve "localhost:9876/valid"
-      data.should.equal "page was found"
+      httpGetter.retrieve "http://localhost:9876/valid", (data)->
+        data.should.equal "page was found"
 
   describe '#error', ->
     it 'should return an error code if an error occurs during the request', ->
-      data = httpGetter.retrieve "localhost:9876/invalid"
-      data.should.equal "404"
+      httpGetter.retrieve "http://localhost:9876/error310", (data)->
+        data.should.equal "310"
+      httpGetter.retrieve "http://localhost:9876/invalid", (data)->
+        data.should.equal "404"
 

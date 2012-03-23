@@ -3,15 +3,22 @@ http = require 'http'
 url = require 'url'
 
 class HTTPGetTechnique extends RetrievalTechnique
-  retrieve: (location) -> 
+  retrieve: (location, callback) ->
+    locationElements = url.parse location
+    options = {
+       hostname: locationElements.hostname
+       port: locationElements.port
+       path: locationElements.path
+    }
+    request = http.request options, (results) ->
+      statusCode = results.statusCode
+      resultsData = ""
+      resultsData += "#{statusCode}" if statusCode != 200
+      results.on 'data', (chunk)=>
+        resultsData += chunk
 
-    # locationElements = url.parse
-    #options = {
-    #   host: 'www.google.com',
-    #   port: 80,
-    #   path: '/index.html'
-    #}
-    #http.get(options, function(res) {
-    #   console.log("Got response: " + res.statusCode);
+      results.on 'end', =>
+        callback(resultsData)
+    request.end()
     
 module.exports = HTTPGetTechnique

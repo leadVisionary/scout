@@ -1,2 +1,3 @@
-module.exports =
-  Scout: require './scout.agent'
+Scout = require './Scout.agent'
+
+module.exports = Scout

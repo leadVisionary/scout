@@ -1,10 +1,10 @@
 Scout = require '../../Scout'
 FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
-EverythingStrategy = require '../../models/filteringStrategies/EverythingStrategy'
+NoFilteringStrategy = require '../../models/filteringStrategies/NoFilteringStrategy'
 FormattingStrategy = require '../../models/formattingStrategies/FormattingStrategy'
-EchoInputTechnique = require '../../models/connectionTechniques/EchoInputTechnique'
-HTTPGetTechnique = require '../../models/connectionTechniques/HTTPGetTechnique'
-NoTransformation = require '../../models/formattingStrategies/NoTransformation'
+EchoInputStrategy = require '../../models/retrievalStrategies/EchoInputStrategy'
+HTTPGetStrategy = require '../../models/retrievalStrategies/HTTPGetStrategy'
+NoFormattingStrategy = require '../../models/formattingStrategies/NoFormattingStrategy'
 http = require('http')
 
 pageResponse = "Retrieval was successful"
@@ -30,14 +30,14 @@ describe 'When constructors, accessors, and arguements are all used', ->
         applyFilter: (data) ->
           return 2
 
-      scout = new Scout(EchoInputTechnique, ArrayToString, EveryOtherStrategy)
-      scout.retrievalTechnique = HTTPGetTechnique
-      scout.formatter = NoTransformation
+      scout = new Scout(EchoInputStrategy, ArrayToString, EveryOtherStrategy)
+      scout.retrievalStrategy = HTTPGetStrategy
+      scout.formatter = NoFormattingStrategy
       scout.strategy = Return2Strategy
       
       expectedResults = (results)=>
         results.should.eql pageResponse
         done()
 
-      scout.get "http://localhost:9988", expectedResults, EverythingStrategy
+      scout.get "http://localhost:9988", expectedResults, NoFilteringStrategy
 

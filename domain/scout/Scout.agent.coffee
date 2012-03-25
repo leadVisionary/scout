@@ -1,14 +1,14 @@
-EverythingStrategy = require('./models/filteringStrategies/EverythingStrategy')
-NoTransformation = require('./models/formattingStrategies/NoTransformation')
-HTTPGetTechnique = require('./models/connectionTechniques/HTTPGetTechnique')
+NoFilteringStrategy = require('./models/filteringStrategies/NoFilteringStrategy')
+NoFormattingStrategy = require('./models/formattingStrategies/NoFormattingStrategy')
+HTTPGetStrategy = require('./models/retrievalStrategies/HTTPGetStrategy')
 get = require('./services/get.coffee')
 
 class Scout
-  constructor: (@retrievalTechnique = HTTPGetTechnique, @formatter = NoTransformation, @strategy = EverythingStrategy)->
+  constructor: (@retriever = HTTPGetStrategy, @formatter = NoFormattingStrategy, @filterer = NoFilteringStrategy)->
   
-  get: (location, callback, strategy = @strategy) -> get(location, callback, @retrievalTechnique, strategy, @formatter)
-  setStrategy: (strategy) -> @strategy = strategy
-  setFormatter: (formatter) -> @formatter = formatter
-  setTechnique: (technique) -> @retrievalTechnique = technique
+  get: (location, callback, filter = @filterer) -> get(location, callback, @retriever, filter, @formatter)
+  setFilterer: (strategy) -> @filterer = strategy
+  setFormatter: (strategy) -> @formatter = strategy
+  setRetriever: (strategy) -> @retriever = strategy
 
 module.exports = Scout

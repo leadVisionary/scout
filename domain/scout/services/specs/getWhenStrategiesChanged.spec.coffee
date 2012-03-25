@@ -1,7 +1,7 @@
 Scout = require '../../Scout'
 FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
 FormattingStrategy = require '../../models/formattingStrategies/FormattingStrategy'
-EchoInputTechnique = require '../../models/connectionTechniques/EchoInputTechnique'
+EchoInputStrategy = require '../../models/retrievalStrategies/EchoInputStrategy'
 
 require 'should'
 
@@ -11,7 +11,7 @@ describe 'When retrieval technique is changed', ->
       data = [0..10]
       connectionScout = new Scout()
 
-      connectionScout.retrievalTechnique = EchoInputTechnique
+      connectionScout.retrievalStrategy = EchoInputStrategy
 
       connectionScout.get data, (results)=>
         results.should.eql data
@@ -24,7 +24,7 @@ describe 'When formatter is changed', ->
       class ArrayToString extends FormattingStrategy
         applyFormat: (data) ->
           data.join()
-      formatScout = new Scout(EchoInputTechnique)
+      formatScout = new Scout(EchoInputStrategy)
 
       formatScout.formatter = ArrayToString
 
@@ -38,7 +38,7 @@ describe 'When strategy is changed', ->
       class EveryOtherStrategy extends FilteringStrategy
         applyFilter: (data) ->
           (x for x in data[0..data.length] by 2)
-      filterScout = new Scout(EchoInputTechnique)
+      filterScout = new Scout(EchoInputStrategy)
 
       filterScout.strategy = EveryOtherStrategy
 

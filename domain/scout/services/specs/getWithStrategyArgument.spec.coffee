@@ -1,12 +1,12 @@
 Scout = require '../../Scout'
 FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
-EchoInputTechnique = require '../../models/connectionTechniques/EchoInputTechnique'
+EchoInputStrategy = require '../../models/retrievalStrategies/EchoInputStrategy'
 require 'should'
 
 describe 'Given a strategy argument', ->
   describe '#get',  ->
     it 'should get data according to the strategy',(done)->
-      scout = new Scout(EchoInputTechnique)
+      scout = new Scout(EchoInputStrategy)
       data = [0..10]
       class EveryOtherStrategy extends FilteringStrategy
         applyFilter: (data) ->

@@ -1,8 +1,8 @@
-RetrievalTechnique = require './RetrievalTechnique'
+RetrievalStrategy = require './RetrievalStrategy'
 http = require 'http'
 url = require 'url'
 
-class HTTPGetTechnique extends RetrievalTechnique
+class HTTPGetStrategy extends RetrievalStrategy
   retrieve: (location, callback) ->
     locationElements = url.parse location
     options = {
@@ -21,4 +21,4 @@ class HTTPGetTechnique extends RetrievalTechnique
         callback(resultsData)
     request.end()
     
-module.exports = HTTPGetTechnique
+module.exports = HTTPGetStrategy

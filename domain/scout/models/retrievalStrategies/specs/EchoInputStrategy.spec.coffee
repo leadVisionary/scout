@@ -1,9 +1,9 @@
-EchoInputTechnique = require '../EchoInputTechnique'
+EchoInputStrategy = require '../EchoInputStrategy'
 require 'should'
 
-stringEchoer = new EchoInputTechnique()
+stringEchoer = new EchoInputStrategy()
 
-describe 'EchoInputTechnique', ->
+describe 'EchoInputStrategy', ->
   describe '#retrieve', ->
 
     it 'should not modify its input', ->

@@ -1,8 +1,8 @@
 Scout = require '../../Scout'
 FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
 FormattingStrategy = require '../../models/formattingStrategies/FormattingStrategy'
-EchoInputTechnique = require '../../models/connectionTechniques/EchoInputTechnique'
-NoTransformation = require '../../models/formattingStrategies/NoTransformation'
+EchoInputStrategy = require '../../models/retrievalStrategies/EchoInputStrategy'
+NoFormattingStrategy = require '../../models/formattingStrategies/NoFormattingStrategy'
 
 require 'should'
 
@@ -11,7 +11,7 @@ describe 'When constructed with a custom connection technique', ->
   describe '#get', ->
     it 'should return results', (done)->
       data = [0..10]
-      connectionScout = new Scout(EchoInputTechnique)
+      connectionScout = new Scout(EchoInputStrategy)
 
       connectionScout.get data, (results)=>
         results.should.eql data
@@ -24,7 +24,7 @@ describe 'When constructed with a custom formatter', ->
       class ArrayToString extends FormattingStrategy
         applyFormat: (data) ->
           data.join()
-      formatScout = new Scout(EchoInputTechnique, ArrayToString)
+      formatScout = new Scout(EchoInputStrategy, ArrayToString)
 
       formatScout.get data, (results)=>
         results.should.eql data.join()
@@ -36,7 +36,7 @@ describe 'When constructed with a custom filter', ->
       class EveryOtherStrategy extends FilteringStrategy
         applyFilter: (data) ->
           (x for x in data[0..data.length] by 2)
-      filterScout = new Scout(EchoInputTechnique, NoTransformation, EveryOtherStrategy)
+      filterScout = new Scout(EchoInputStrategy, NoFormattingStrategy, EveryOtherStrategy)
 
       data = (x for x in [0..10])
       filterScout.get data, (results)=>

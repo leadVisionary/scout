@@ -1,8 +1,8 @@
-HTTPGetTechnique = require '../HTTPGetTechnique'
+HTTPGetStrategy = require '../HTTPGetStrategy'
 require 'should'
 http = require('http')
 url = require('url')
-httpGetter = new HTTPGetTechnique()
+httpGetter = new HTTPGetStrategy()
 
 before ->
   onRequest = (request, response) ->
@@ -19,7 +19,7 @@ before ->
     response.end()
   http.createServer(onRequest).listen 9876
 
-describe 'HTTPGetTechnique', ->
+describe 'HTTPGetStrategy', ->
   describe '#get',  ->
     it 'should get the contents of an http location', ->
       httpGetter.retrieve "http://localhost:9876/valid", (data)->

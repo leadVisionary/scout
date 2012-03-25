@@ -1,9 +1,9 @@
-NoTransformation = require '../NoTransformation.coffee'
+NoFormattingStrategy = require '../NoFormattingStrategy.coffee'
 require 'should'
 
-transformer = new NoTransformation()
+transformer = new NoFormattingStrategy()
 
-describe 'NoTranformation', ->
+describe 'NoFormatting', ->
   describe '#transform', ->
     it 'should not transform its input', ->
       data = [1, 2, 3]

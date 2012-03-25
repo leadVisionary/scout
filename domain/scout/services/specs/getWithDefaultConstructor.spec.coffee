@@ -3,8 +3,6 @@ require 'should'
 http = require('http')
 url = require('url')
 
-scout = new Scout()
-
 before ->
   onRequest = (request, response) ->
     pathname = url.parse(request.url).pathname
@@ -23,8 +21,7 @@ before ->
 describe 'Using Default Constructor', ->
   describe '#get',  ->
     it 'should get the contents of an http location',(done)->
+      scout = new Scout()
       scout.get "http://localhost:9876/valid", (data)=>
         data.should.equal "page was found"
         done()
-
-

@@ -11,7 +11,7 @@ describe 'When retrieval technique is changed', ->
       data = [0..10]
       connectionScout = new Scout()
 
-      connectionScout.retrievalStrategy = EchoInputStrategy
+      connectionScout.setRetriever(EchoInputStrategy)
 
       connectionScout.get data, (results)=>
         results.should.eql data
@@ -26,13 +26,13 @@ describe 'When formatter is changed', ->
           data.join()
       formatScout = new Scout(EchoInputStrategy)
 
-      formatScout.formatter = ArrayToString
+      formatScout.setFormatter(ArrayToString)
 
       formatScout.get data, (results)=>
         results.should.eql data.join()
         done()
 
-describe 'When strategy is changed', ->
+describe 'When filterer is changed', ->
   describe '#get', ->
     it 'should apply filter to results', (done)->
       class EveryOtherStrategy extends FilteringStrategy
@@ -40,7 +40,7 @@ describe 'When strategy is changed', ->
           (x for x in data[0..data.length] by 2)
       filterScout = new Scout(EchoInputStrategy)
 
-      filterScout.strategy = EveryOtherStrategy
+      filterScout.setFilterer(EveryOtherStrategy)
 
       data = (x for x in [0..10])
       filterScout.get data, (results)=>

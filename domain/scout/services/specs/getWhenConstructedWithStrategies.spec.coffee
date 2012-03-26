@@ -7,7 +7,7 @@ NoFormattingStrategy = require '../../models/formattingStrategies/NoFormattingSt
 require 'should'
 
 
-describe 'When constructed with a custom connection technique', ->
+describe 'When constructed with a custom retrieval technique', ->
   describe '#get', ->
     it 'should return results', (done)->
       data = [0..10]

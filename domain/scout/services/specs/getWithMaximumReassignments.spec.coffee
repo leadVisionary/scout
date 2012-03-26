@@ -17,9 +17,9 @@ before ->
   http.createServer(onRequest).listen 9988
 
 require 'should'
-describe 'When constructors, accessors, and arguements are all used', ->
+describe 'When constructors, accessors, and arguments are all used', ->
   describe '#get', ->
-    it 'should behave as appropriate for the most recent assignments', (done)->
+    it 'should behave appropriately for the most recent assignments', (done)->
       class ArrayToString extends FormattingStrategy
         applyFormat: (data) ->
           data.join()
@@ -31,9 +31,9 @@ describe 'When constructors, accessors, and arguements are all used', ->
           return 2
 
       scout = new Scout(EchoInputStrategy, ArrayToString, EveryOtherStrategy)
-      scout.retrievalStrategy = HTTPGetStrategy
-      scout.formatter = NoFormattingStrategy
-      scout.strategy = Return2Strategy
+      scout.setRetriever(HTTPGetStrategy)
+      scout.setFormatter(NoFormattingStrategy)
+      scout.setFilterer(Return2Strategy)
       
       expectedResults = (results)=>
         results.should.eql pageResponse

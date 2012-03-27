@@ -4,6 +4,9 @@ http = require('http')
 url = require('url')
 httpGetter = new HTTPGetStrategy()
 
+server = {}
+serverPort = 9876
+
 before ->
   onRequest = (request, response) ->
     pathname = url.parse(request.url).pathname
@@ -17,18 +20,34 @@ before ->
       response.writeHead 404, "Content-Type": "text/plain"
       response.write "page not found"
     response.end()
-  http.createServer(onRequest).listen 9876
+
+  tryNextPort = (error)=>
+    if error.code == 'EADDRINUSE'
+      if serverPort < 9900
+        serverPort++
+        server.listen serverPort, http.INADDR_ANY
+    
+  server = http.createServer(onRequest)
+  server.on 'error', tryNextPort
+  server.listen serverPort, http.INADDR_ANY
+
 
 describe 'HTTPGetStrategy', ->
   describe '#get',  ->
-    it 'should get the contents of an http location', ->
-      httpGetter.retrieve "http://localhost:9876/valid", (data)->
+    it 'should get the contents of an http location', (done)->
+      httpGetter.retrieve "http://localhost:#{serverPort}/valid", (data)->
         data.should.equal "page was found"
+        done()
 
-  describe '#error', ->
-    it 'should return an error code if an error occurs during the request', ->
-      httpGetter.retrieve "http://localhost:9876/error310", (data)->
+  describe '#get', ->
+    it 'should return an error code if an error occurs during the request', (done)->
+      httpGetter.retrieve "http://localhost:#{serverPort}/error310", (data)->
         data.should.equal "310"
-      httpGetter.retrieve "http://localhost:9876/invalid", (data)->
+        done()
+
+  describe '#get', ->
+    it 'should return 404 if the resource is not found', (done)->
+      httpGetter.retrieve "http://localhost:#{serverPort}/invalid", (data)->
         data.should.equal "404"
+        done()
 

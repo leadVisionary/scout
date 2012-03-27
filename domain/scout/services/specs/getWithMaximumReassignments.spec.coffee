@@ -8,18 +8,31 @@ NoFormattingStrategy = require '../../models/formattingStrategies/NoFormattingSt
 http = require('http')
 
 pageResponse = "Retrieval was successful"
+server = {}
+serverPort = 9876
 
-before ->
+before =>
   onRequest = (request, response) ->
     response.writeHead 200, "Content-Type": "text/plain"
     response.write pageResponse
     response.end()
-  http.createServer(onRequest).listen 9988
+ 
+  tryNextPort = (error)=>
+    if error.code == 'EADDRINUSE'
+      if serverPort < 9900
+        serverPort++
+        server.listen serverPort, http.INADDR_ANY
+      
+  server = http.createServer(onRequest)
+  server.on 'error', tryNextPort
+  server.listen serverPort, http.INADDR_ANY
+
 
 require 'should'
 describe 'When constructors, accessors, and arguments are all used', ->
   describe '#get', ->
     it 'should behave appropriately for the most recent assignments', (done)->
+
       class ArrayToString extends FormattingStrategy
         applyFormat: (data) ->
           data.join()
@@ -39,5 +52,5 @@ describe 'When constructors, accessors, and arguments are all used', ->
         results.should.eql pageResponse
         done()
 
-      scout.get "http://localhost:9988", expectedResults, NoFilteringStrategy
+      scout.get "http://localhost:#{serverPort}", expectedResults, NoFilteringStrategy
 

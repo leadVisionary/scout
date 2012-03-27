@@ -4,22 +4,26 @@ HTTPGetStrategy = require('./models/retrievalStrategies/HTTPGetStrategy')
 FilteringStrategy = require('./models/filteringStrategies/FilteringStrategy')
 FormattingStrategy = require('./models/formattingStrategies/FormattingStrategy')
 RetrievalStrategy = require('./models/retrievalStrategies/RetrievalStrategy')
-get = require('./services/get.coffee')
+get = require('./services/get')
+
+checkClassMembership = (strategy, parentClass) ->
+  #instanceof will behave poorly if strategies input are not written in coffeescript
+  strategyObject = new strategy()
+  if strategyObject instanceof parentClass
+    return true
+  else
+    throw "Strategy is of invalid type"
 
 class Scout
-  constructor: (@retriever = HTTPGetStrategy, @formatter = NoFormattingStrategy, @filterer = NoFilteringStrategy)->
+  setFilterer: (strategy) -> @filterer = strategy if checkClassMembership strategy, FilteringStrategy
+  setFormatter: (strategy) -> @formatter = strategy if checkClassMembership strategy, FormattingStrategy
+  setRetriever: (strategy) -> @retriever = strategy if checkClassMembership strategy, RetrievalStrategy
+ 
+  constructor: (retriever = HTTPGetStrategy, formatter = NoFormattingStrategy, filterer = NoFilteringStrategy)->
+    @setFilterer filterer
+    @setFormatter formatter
+    @setRetriever retriever
 
-  
   get: (location, callback, filter = @filterer) -> get(location, callback, @retriever, filter, @formatter)
-
-  checkClassMembership: (strategy, parentClass) ->
-    if new strategy instanceof parentClass
-      return YES
-    else
-      throw "Strategy of invalid type"
-
-  setFilterer: (strategy) -> @filterer = strategy
-  setFormatter: (strategy) -> @formatter = strategy
-  setRetriever: (strategy) -> @retriever = strategy
 
 module.exports = Scout

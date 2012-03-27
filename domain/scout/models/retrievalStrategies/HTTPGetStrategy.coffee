@@ -13,9 +13,11 @@ class HTTPGetStrategy extends RetrievalStrategy
     request = http.request options, (results) ->
       statusCode = results.statusCode
       resultsData = ""
-      resultsData += "#{statusCode}" if statusCode != 200
-      results.on 'data', (chunk)=>
-        resultsData += chunk
+      if statusCode != 200
+        resultsData += "#{statusCode}"
+      else
+        results.on 'data', (chunk)=>
+          resultsData += chunk
 
       results.on 'end', =>
         callback(resultsData)

@@ -27,3 +27,6 @@ class Scout
   get: (location, callback, filter = @filterer) -> get(location, callback, @retriever, filter, @formatter)
 
 module.exports = Scout
+module.exports.FilteringStrategy = FilteringStrategy
+module.exports.FormattingStrategy = FormattingStrategy
+module.exports.RetrievalStrategy = RetrievalStrategy

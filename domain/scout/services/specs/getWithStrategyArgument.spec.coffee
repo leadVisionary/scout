@@ -1,16 +1,13 @@
 Scout = require '../../Scout'
 FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
-EchoInputStrategy = require '../../models/retrievalStrategies/EchoInputStrategy'
+EveryOtherStrategy = require './mocks/EveryOtherStrategy'
 require 'should'
 
 describe 'Given a filtering strategy argument', ->
   describe '#get',  ->
     it 'should get data and filter it according to the strategy',(done)->
-      scout = new Scout(EchoInputStrategy)
+      scout = new Scout()
       data = [0..10]
-      class EveryOtherStrategy extends FilteringStrategy
-        applyFilter: (data) ->
-          (x for x in data[0..data.length] by 2)
  
       callback = (result) =>
         result.should.not.eql data

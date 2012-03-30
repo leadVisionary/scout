@@ -3,8 +3,9 @@ require 'should'
 
 describe 'Using Default Constructor', ->
   describe '#get',  ->
-    it 'should echo what was done',(done)->
+    it 'should echo its input',(done)->
       scout = new Scout()
-      scout.get "boogah", (data)=>
-        data.should.equal "boogah"
+      response = "I'm the response"
+      scout.get response, (data)=>
+        data.should.eql response
         done()

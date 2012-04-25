@@ -1,5 +1,5 @@
 class FilteringStrategy
-  constructor: ->
   applyFilter: (data) ->
+    data
 
 module.exports = FilteringStrategy

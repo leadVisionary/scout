@@ -12,10 +12,8 @@ describe 'When using multiple scouts with different strategies', ->
       dataToEcho = "Repeat me"
       dataToCdr = [1..10]
 
-      echoScout.get dataToEcho, (echoData)=>
+      echoScout.get dataToEcho, (echoData)->
         echoData.should.eql dataToEcho
-        cdrScout.get dataToCdr, (cdrData)=>
+        cdrScout.get dataToCdr, (cdrData)->
           cdrData.should.eql [2..10]
           done()
-
- 

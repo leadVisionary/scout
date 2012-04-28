@@ -33,11 +33,8 @@ describe 'When constructed with a custom filter', ->
   describe '#get', ->
     it 'should apply filter to results', (done)->
       filterScout = new Scout(EchoInputStrategy, FormattingStrategy, EveryOtherStrategy)
-
       data = (x for x in [0..10])
       filterScout.get data, (results)->
         data.should.not.eql results
         results.should.eql (x for x in [0..10] by 2)
         done()
-
-

@@ -10,7 +10,7 @@ checkClassMembership = (strategy, parentClass) ->
   if strategyObject instanceof parentClass
     return true
   else
-    throw "Strategy is of invalid type"
+    throw new Error "Strategy is of invalid type"
 
 class Scout
   setFilterer: (strategy) -> @filterer = strategy if checkClassMembership strategy, FilteringStrategy
@@ -22,7 +22,11 @@ class Scout
     @setFormatter formatter
     @setRetriever retriever
 
-  get: (location, callback, filter = @filterer) -> get(location, callback, @retriever, filter, @formatter)
+  get: (location, callback, filteringStrategy = @filterer) ->
+    retriever = new @retriever()
+    filterer = new filteringStrategy()
+    formatter = new @formatter()
+    get location, callback, retriever, filterer, formatter
 
 module.exports = Scout
 module.exports.FilteringStrategy = FilteringStrategy

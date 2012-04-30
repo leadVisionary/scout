@@ -7,20 +7,20 @@
 <h1>Scout</h1>
 <p>Like a scout in a warrior group, the <strong>Scout</strong> archtype embodies the responsibility of retrieving information from distant locations.<strong>Scouts</strong> are responsible for knowing:</p>
 
-- how to get to where they need to go (A RetrievalStrategy)  
-- what their dispatchers are looking for (A FilteringStrategy)
-- how the information they return is to be conveyed (A FormattingStrategy)
+- how to get to where they need to go (A <code>RetrievalStrategy</code>)  
+- what their dispatchers are looking for (A <code>FilteringStrategy</code>)
+- how the information they return is to be conveyed (A <code>FormattingStrategy</code>)
 
 <p>An <strong>Scout</strong> provides these basic services:</p>
-- get(location, callback, retriever, filterer, formatter)
+- <code>get(location, callback, retriever, filterer, formatter)</code>
 
 <h1>Specializations</h1>
-<p>A particular type of <strong>Scout</strong>, for example an ESPNScout, would extend the Scout archetype through an application of the <a href="http://addyosmani.com/blog/decorator-pattern/" target="_blank">Decorator pattern</a>and explicitly devise its own retrieval, filtering and formatting strategies by extending the base interfaces and providing their own implemenations.</p>
+<p>A particular type of <strong>Scout</strong>, for example an ESPNScout, would extend the Scout archetype through an application of the <a href="http://addyosmani.com/blog/decorator-pattern/" target="_blank">Decorator pattern</a> and explicitly devise its own retrieval, filtering and formatting strategies by extending the base interfaces and providing their own implemenations.</p>
 
 <h1>Source Layout and contents</h1>
 <p>The directory content of <strong>Scout</strong> follows rzr style, adhering to the principles of <a href="http://domaindrivendesign.org/" target="_blank">Domain Driven Design</a> by defining a Bounded Context called domain/ by convention. The domain has separate modules, though it is a rzr guiding principle that blades (plugin components) be as minimalistic as possible. Hence, the <strong>Scout</strong> has one module, scout/.</p>
 
-<p>Each module has an Aggregate Root, conventionally named for the Module (in this case, Archivist.coffee). The Module contains the standard DDD components of Models and Services. Factories and Repositories are option, though the beta applications in <em>Personify</em> have delegated those responsiblities to other Agents (the <strong>Archivist</strong> is the Repository handler).  The Aggregate root exposes the agents the module provides for external interface. Modules in rzr style are Agents, though they may not always be very smart.</p>
+<p>Each module has an Aggregate Root, conventionally named for the Module (in this case, Scout.coffee). The Module contains the standard DDD components of Models and Services. Factories and Repositories are option, though the beta applications in <em>Personify</em> have delegated those responsiblities to other Agents (the <strong>Archivist</strong> is the Repository handler).  The Aggregate root exposes the agents the module provides for external interface. Modules in rzr style are Agents, though they may not always be very smart.</p>
 
 <h1>More on Agent Implementation</h1>
 <p>A dumb Agent may function much like an ideal <a href="http://java.sun.com/blueprints/patterns/FrontController.html" target="_blank">Front Controller</a> in a traditional Model-View-Controller application, forming an API for the services it provides and delegating requests appropriately.</p> 

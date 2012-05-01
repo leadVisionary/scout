@@ -1,7 +1,7 @@
 Scout = require './Scout.agent'
-RetrievalStrategy = require './models/retrievalStrategies/RetrievalStrategy'
-FilteringStrategy = require './models/filteringStrategies/FilteringStrategy'
-FormattingStrategy = require './models/formattingStrategies/FormattingStrategy'
+RetrievalStrategy = require './models/RetrievalStrategy'
+FilteringStrategy = require './models/FilteringStrategy'
+FormattingStrategy = require './models/FormattingStrategy'
 
 module.exports = Scout
 module.exports.RetrievalStrategy = RetrievalStrategy

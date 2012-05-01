@@ -1,4 +1,4 @@
-RetrievalStrategy = require '../../models/retrievalStrategies/RetrievalStrategy'
+RetrievalStrategy = require '../../models/RetrievalStrategy'
 
 class CdrStrategy extends RetrievalStrategy
   retrieve: (location, callback) ->

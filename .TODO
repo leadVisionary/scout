@@ -1,2 +1,11 @@
-Strip out HTTPGetStrategy
+Add contract specification for Scout
+- Consider what happens when:
+  -- A FormattingStrategy fails (malformed XML/JSON)
+  -- A RetrievalStrategy takes too long (timeout, not connected to the Net)
+  -- A RetrievalStrategy fails (tries to go to a place that doesn't exist)
+  -- A FilteringStrategy fails (tries to remove stuff that isn't there)
 
++ Can a Scout make predictions about the accuracy of its information?
+-- A Scout could periodically check a place its gotten information from before. Keep track of how often it changes. A place that doesn't change very often could be cached, and only retrieved if the client wants absolute certainty of freshness
+
+ 

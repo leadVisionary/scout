@@ -1,4 +1,4 @@
-FormattingStrategy = require '../../../models/formattingStrategies/FormattingStrategy'
+FormattingStrategy = require '../../../models/FormattingStrategy'
 
 class ArrayToStringStrategy extends FormattingStrategy
   applyFormat: (data) ->

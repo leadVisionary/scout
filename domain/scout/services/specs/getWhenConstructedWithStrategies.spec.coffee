@@ -1,8 +1,7 @@
 Scout = require '../../Scout'
-FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
-FormattingStrategy = require '../../models/formattingStrategies/FormattingStrategy'
-RetrievalStrategy = require '../../models/retrievalStrategies/RetrievalStrategy'
-EchoInputStrategy = require '../../models/retrievalStrategies/EchoInputStrategy'
+FilteringStrategy = require '../../models/FilteringStrategy'
+FormattingStrategy = require '../../models/FormattingStrategy'
+RetrievalStrategy = require '../../models/RetrievalStrategy'
 CdrStrategy = require './mocks/CdrStrategy'
 EveryOtherStrategy = require './mocks/EveryOtherStrategy'
 ArrayToStringStrategy = require './mocks/ArrayToStringStrategy'
@@ -23,7 +22,7 @@ describe 'When constructed with a custom formatter', ->
   describe '#get', ->
     it 'should reformat results', (done)->
       data = [0..10]
-      formatScout = new Scout(EchoInputStrategy, ArrayToStringStrategy)
+      formatScout = new Scout(RetrievalStrategy, ArrayToStringStrategy)
 
       formatScout.get data, (results)->
         results.should.eql data.join()
@@ -32,7 +31,7 @@ describe 'When constructed with a custom formatter', ->
 describe 'When constructed with a custom filter', ->
   describe '#get', ->
     it 'should apply filter to results', (done)->
-      filterScout = new Scout(EchoInputStrategy, FormattingStrategy, EveryOtherStrategy)
+      filterScout = new Scout(RetrievalStrategy, FormattingStrategy, EveryOtherStrategy)
       data = (x for x in [0..10])
       filterScout.get data, (results)->
         data.should.not.eql results

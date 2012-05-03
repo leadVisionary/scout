@@ -1,5 +1,5 @@
 Scout = require '../../Scout'
-FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
+FilteringStrategy = require '../../models/FilteringStrategy'
 EveryOtherStrategy = require './mocks/EveryOtherStrategy'
 require 'should'
 

@@ -10,6 +10,6 @@ services:
 	./node_modules/.bin/mocha --reporter list --compilers coffee:coffee-script domain/scout/services/specs/*.coffee
 
 models:
-	./node_modules/.bin/mocha --reporter list --compilers coffee:coffee-script domain/scout/models/*/specs/*.coffee
+	./node_modules/.bin/mocha --reporter list --compilers coffee:coffee-script domain/scout/models/specs/*.coffee
 
 .PHONY: test

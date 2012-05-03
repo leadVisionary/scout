@@ -1,7 +1,6 @@
-EchoInputStrategy = require('./models/retrievalStrategies/EchoInputStrategy')
-FilteringStrategy = require('./models/filteringStrategies/FilteringStrategy')
-FormattingStrategy = require('./models/formattingStrategies/FormattingStrategy')
-RetrievalStrategy = require('./models/retrievalStrategies/RetrievalStrategy')
+FilteringStrategy = require('./models/FilteringStrategy')
+FormattingStrategy = require('./models/FormattingStrategy')
+RetrievalStrategy = require('./models/RetrievalStrategy')
 get = require('./services/get')
 
 checkClassMembership = (strategy, parentClass) ->
@@ -17,7 +16,7 @@ class Scout
   setFormatter: (strategy) -> @formatter = strategy if checkClassMembership strategy, FormattingStrategy
   setRetriever: (strategy) -> @retriever = strategy if checkClassMembership strategy, RetrievalStrategy
  
-  constructor: (retriever = EchoInputStrategy, formatter = FormattingStrategy, filterer = FilteringStrategy)->
+  constructor: (retriever = RetrievalStrategy, formatter = FormattingStrategy, filterer = FilteringStrategy)->
     @setFilterer filterer
     @setFormatter formatter
     @setRetriever retriever

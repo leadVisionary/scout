@@ -1,4 +1,4 @@
-FilteringStrategy = require '../../models/filteringStrategies/FilteringStrategy'
+FilteringStrategy = require '../../models/FilteringStrategy'
 
 class EveryOtherStrategy extends FilteringStrategy
   applyFilter: (data) ->

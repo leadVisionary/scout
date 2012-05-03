@@ -1,9 +1,9 @@
-EchoInputStrategy = require '../EchoInputStrategy'
+RetrievalStrategy = require '../RetrievalStrategy'
 require 'should'
 
-stringEchoer = new EchoInputStrategy()
+stringEchoer = new RetrievalStrategy()
 
-describe 'EchoInputStrategy', ->
+describe 'RetrievalStrategy', ->
   describe '#retrieve', ->
     it 'should not modify its input', ->
       data = [8, 6, 7, 5, 3, 0, 9]
